@@ -48,6 +48,9 @@ app.use("/api", routes);
 
 // define a simple route
 app.get("/", (req, res) => {
+  console.log(req);
+
+
   res.json({
     message: "Hello from DeltaHack2022 Backend!",
   });
