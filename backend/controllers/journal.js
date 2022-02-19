@@ -3,12 +3,14 @@ const { Journal } = require("../models");
 
 exports.get = async (req, res)=>{
     
-    const {userId} = req.body._id;
+
+    const userId = req.body.userId;
+    console.log(userId);
 
     try
     {
         if (userId) {
-            const journal = await journal.find({ userId});
+            const journal = await Journal.find({userId: userId});
       
             res.status(200).json({
              error: null,
@@ -30,6 +32,7 @@ exports.get = async (req, res)=>{
 exports.create = async (req, res)=>{
 
     const journal = new Journal({
+        userId: req.body.userId,
         dayDescription: req.body.dayDescription,
         productivityRange: req.body.productivityRange,
         hasExcercised: req.body.hasExcercised

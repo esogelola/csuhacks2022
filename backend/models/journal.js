@@ -1,6 +1,13 @@
+const { number } = require("joi");
 const mongoose = require("mongoose");
 
 const journalSchema = new mongoose.Schema({
+    
+    userId:{
+        type: Number,
+        required: true,
+    },
+
 
     dayDescription:{
         type: String,
