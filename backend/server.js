@@ -50,7 +50,7 @@ app.use("/api", routes);
 app.get("/", (req, res) => {
  
   res.json({
-    message: "Hello from CuHacks2022 Backend!",
+    message: "Hello from CsuHacks2022 Backend!",
   });
 });
 
