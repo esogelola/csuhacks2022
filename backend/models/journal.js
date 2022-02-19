@@ -11,7 +11,7 @@ const journalSchema = new mongoose.Schema({
         type: Number
     },
     hasExcercised:{
-        type:boolean
+        type:Boolean
     }
 })
 
