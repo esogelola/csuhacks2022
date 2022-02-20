@@ -5,7 +5,7 @@ import SidebarItems from "./SidebarItems";
 import { GiBookmark } from "react-icons/gi";
 import { Link } from "react-router-dom";
 const SidebarParent = styled.div`
-  background: #565f56;
+  background: #34494C;
   width: 4.5rem;
   min-height: 100vh;
   display: flex;
@@ -16,7 +16,7 @@ const SidebarParent = styled.div`
 const SidebarHeader = styled.div`
   display: block;
   padding: 1rem;
-  background: #474747;
+  background: #253334;
   a {
     color: #212529;
     text-decoration: none !important;
@@ -24,12 +24,12 @@ const SidebarHeader = styled.div`
   }
 `;
 const SidebarItem = styled.div`
-  padding: 16px 24px;
+  padding: 16px 20px;
   align-content: center;
   transition: all 0.25s ease-in-out;
   //Change the background color if 'active' prop is received
-  background: ${(props) => (props.active ? "#474747" : "")};
-  margin: 60px 0px;
+  background: ${(props) => (props.active ? "#253334" : "#B8C2BB")};
+  margin: 60px 7px;
   border-radius: 21px;
 
   span {
@@ -43,7 +43,7 @@ const SidebarItem = styled.div`
   }
 
   &:hover {
-    background: #474747;
+    background: #253334;
   }
 `;
 
@@ -88,8 +88,9 @@ function Sidebar(props, { defaultActive }) {
           <img
             src="https://github.com/mdo.png"
             alt="mdo"
-            width="24"
-            height="24"
+            width="30"
+            height="30"
+            
             className="rounded-circle"
           />
         </SidebarHeader>
