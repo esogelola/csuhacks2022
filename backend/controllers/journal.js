@@ -1,9 +1,8 @@
 // Import User model here
 const { Journal } = require("../models");
 
-exports.get = async (req, res)=>{
-    
-
+exports.getAll = async (req, res)=>{
+  
     const userId = req.body.userId;
     
     try
@@ -26,6 +25,33 @@ exports.get = async (req, res)=>{
     }
 
 }
+
+
+exports.getOne = async (req, res)=>{
+  
+    const journalId = req.body._id;
+    
+    try
+    {
+        if (journalId) {
+            const journal = await Journal.find({_id: journalId});
+      
+            res.status(200).json({
+             error: null,
+             journal: journal
+            });
+          } else {
+            res.status(400).json({ error: "journal ID must be defined" });
+          }
+        
+    }
+    catch(error)
+    {
+        res.status(400).json({error});
+    }
+
+}
+
 
 
 exports.create = async (req, res)=>{

@@ -5,7 +5,8 @@ const { journal: controller } = require("../controllers/");
 const router = express.Router();
 
 // unprotected route
-router.route("/get").get(controller.get);
+router.route("/getAll").get(controller.getAll);
+router.route("/getOne").get(controller.getOne);
 router.route("/create").post(controller.create);
 router.route("/status").get(controller.status);
 
