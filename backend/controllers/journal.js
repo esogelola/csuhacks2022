@@ -48,8 +48,6 @@ exports.create = async (req, res)=>{
 }
 
 
-
-
 exports.status = (req, res) => {
     res.json({
       message: "OK",

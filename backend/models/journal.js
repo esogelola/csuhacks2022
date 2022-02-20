@@ -7,8 +7,6 @@ const journalSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-
-
     dayDescription:{
         type: String,
         required: true,
