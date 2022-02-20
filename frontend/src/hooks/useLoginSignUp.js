@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { GlobalContext } from "../contexts/GlobalContext";
 
-const useLoginSignUp = (isLogin, onClose) => {
+const useLoginSignUp = (isLogin) => {
   const [login, setLogin] = useState(isLogin);
   const [submitted, setSubmitted] = useState(false);
   const [signUpUser, setSignUpUser] = useState({
@@ -20,7 +20,6 @@ const useLoginSignUp = (isLogin, onClose) => {
   const { setIsLoggedIn, setToken, setUsername } = useContext(GlobalContext);
 
   const handleLogin = (token, username) => {
-    onClose();
     setIsLoggedIn(true);
     setToken(token);
     setSubmitted(false);
@@ -30,13 +29,13 @@ const useLoginSignUp = (isLogin, onClose) => {
   useEffect(() => {
     if (isLogin && submitted) {
       axios
-        .post("https://localhost:8080/api/user/login", loginUser)
+        .post("http://localhost:8080/api/user/login", loginUser)
         .then((res) => {
           handleLogin(res.data.data.token, loginUser.username);
         });
     } else if (submitted) {
       axios
-        .post("https://localhost:8080/api/user/register", signUpUser)
+        .post("http://localhost:8080/api/user/register", signUpUser)
         .then((res) => {
           axios
             .post("https://localhost:8080/api/user/login", {
