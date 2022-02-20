@@ -2,10 +2,12 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { GlobalContext } from "../contexts/GlobalContext";
 import { useHistory } from "react-router-dom";
+
 const useLoginSignUp = (isLogin) => {
   const history = useHistory();
   const [login, setLogin] = useState(isLogin);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(null);
   const [signUpUser, setSignUpUser] = useState({
     name: "",
     username: "",
@@ -25,7 +27,7 @@ const useLoginSignUp = (isLogin) => {
     setToken(token);
     setSubmitted(false);
     setUsername(username);
-    history.push("/journals");
+    history.push("/journal");
   };
 
   useEffect(() => {
@@ -45,6 +47,10 @@ const useLoginSignUp = (isLogin) => {
             .then((res) => {
               handleLogin(res.data.data.token, signUpUser.username);
             });
+        })
+        .catch((err) => {
+          setSubmitted(false);
+          setError(err.response.data.error);
         });
     }
   }, [submitted]);
@@ -57,6 +63,7 @@ const useLoginSignUp = (isLogin) => {
     setLoginUser,
     loginUser,
     signUpUser,
+    error,
   };
 };
 

@@ -24,11 +24,11 @@ const getEmotionAnalysis = async (text) => {
     });
 };
 exports.getAll = async (req, res) => {
-  const userId = req.body.userId;
-
+  const username = req.body.username;
+  console.log(req.body);
   try {
-    if (userId) {
-      const journal = await Journal.find({ userId: userId });
+    if (username) {
+      const journal = await Journal.find({ username: username });
 
       res.status(200).json({
         error: null,
@@ -65,15 +65,15 @@ exports.create = async (req, res) => {
   const journalText = req.body.dayDescription;
 
   if (journalText) {
-    let emotionAnalysis;
+    let emotionAnalysis = {};
     await getEmotionAnalysis(journalText).then((value) => {
       emotionAnalysis = value;
     });
-    console.log(emotionAnalysis.emotion_scores);
 
     const newJournal = new Journal({
       userId: req.body.userId,
       dayDescription: journalText,
+      username: req.body.username,
       emotionAnalysis: {
         emotions_detected: emotionAnalysis.emotions_detected,
         emotion_scores: emotionAnalysis.emotion_scores,

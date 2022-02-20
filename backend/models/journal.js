@@ -16,11 +16,6 @@ const emotionAnalysis = new mongoose.Schema({
   result_msg: String,
 });
 const journalSchema = new mongoose.Schema({
-  userId: {
-    type: Number,
-    required: true,
-  },
-
   dayDescription: {
     type: String,
     required: true,
@@ -36,6 +31,12 @@ const journalSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now(),
+  },
+  username: {
+    type: String,
+    required: true,
+    min: 6,
+    max: 16,
   },
 });
 

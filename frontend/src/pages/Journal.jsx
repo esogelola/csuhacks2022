@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
+import useJournal from "../hooks/useJournal";
 
 import { Card, Row, Col, Container, Form } from "react-bootstrap";
 import {
@@ -11,6 +12,7 @@ import {
   FormLabel,
   Radio,
   List,
+  CircularProgress,
 } from "@mui/material";
 const marks = [
   {
@@ -35,81 +37,126 @@ const marks = [
   },
 ];
 
+const Pill = styled.span`
+  color: #fff;
+  background: ${(props) => {
+    if (props.type === "anger") {
+      return "red";
+    } else if (props.type === "joy") {
+      return "green";
+    } else if (props.type === "sadness") {
+      return "teal";
+    } else if (props.type === "suprise") {
+      return "yellow";
+    }
+  }};
+  display: inline-block;
+  padding: 0.25em 0.4em;
+
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+  width: 2rem;
+  margin-right: 1rem;
+`;
+
+const searchCol = {
+  background: "#B8C2BB",
+  boxShadow: "0px 4px 14px rgba(0, 0, 0, 0.25)",
+  padding: "1rem 3rem",
+
+  transition: "all 0.25s ease-in-out",
+};
+const detailsCol = {
+  background: "#F4F4F4",
+  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+  borderRadius: "31px",
+  padding: "2rem 3rem",
+
+  transition: "all 0.25s ease-in-out",
+  margin: "16px",
+  height: "1002px",
+};
+const inputStyle = {
+  background: "#FFFFFF",
+  borderRadius: "14px",
+};
+
+const Button = styled.button`
+  background: #565f56;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 13px;
+
+  color: #fff;
+  border: none;
+  padding: 1rem;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  margin-top: 1rem;
+  margin-left: auto;
+  span {
+    font-family: Libre Baskerville;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 25px;
+    line-height: 31px;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:hover {
+    background: #474747;
+  }
+`;
+
 function Journal(props) {
   const [visible, setVisible] = useState(true);
+  const {
+    journals,
+    setSubmitted,
+    newJournal,
+    setNewJournal,
+    addJournal,
+    loading,
+    setLoading,
+  } = useJournal();
+  const [clickedJournal, setClickedJournal] = useState(null);
 
-  const Pill = styled.span`
-    color: #fff;
-    background-color: #dc3545;
-    display: inline-block;
-    padding: 0.25em 0.4em;
-    font-size: 75%;
-    font-weight: 700;
-    line-height: 1;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border-radius: 0.25rem;
-    width: 2rem;
-  `;
+  useEffect(() => {
+    setSubmitted(true);
+  }, []);
 
-  const searchCol = {
-    background: "#B8C2BB",
-    boxShadow: "0px 4px 14px rgba(0, 0, 0, 0.25)",
-    padding: "1rem 3rem",
-
-    transition: "all 0.25s ease-in-out",
+  useEffect(() => {}, [journals]);
+  const handleJournalEntryClick = (e, journalData) => {
+    setClickedJournal(journalData);
   };
-  const detailsCol = {
-    background: "#F4F4F4",
-    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-    borderRadius: "31px",
-    padding: "2rem 3rem",
+  const toFancy = function (date) {
+    var mm = date.getMonth() + 1; // getMonth() is zero-based
+    var dd = date.getDate();
 
-    transition: "all 0.25s ease-in-out",
-    margin: "16px",
-    height: "1002px",
-  };
-  const inputStyle = {
-    background: "#FFFFFF",
-    borderRadius: "14px",
+    return [
+      date.getFullYear(),
+      (mm > 9 ? "" : "0") + mm,
+      (dd > 9 ? "" : "0") + dd,
+    ].join(" ");
   };
 
-  const Button = styled.button`
-    background: #565f56;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 13px;
-
-    color: #fff;
-    border: none;
-    padding: 1rem;
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
-    margin-top: 1rem;
-    margin-left: auto;
-    span {
-      font-family: Libre Baskerville;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 25px;
-      line-height: 31px;
-    }
-    &:hover {
-      cursor: pointer;
-    }
-
-    &:hover {
-      background: #474747;
-    }
-  `;
-
-  const cardStyle = {
-    background: "#FCFAF4",
-    border: "4px solid #565F56",
-    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-    borderRadius: "19px",
+  const handleSliderChange = (event, newValue) => {
+    setClickedJournal(null);
+    setNewJournal({ ...newJournal, productivityRange: newValue });
   };
+  const handleTextAreaChange = (e) => {
+    setClickedJournal(null);
+    setNewJournal({ ...newJournal, dayDescription: e.target.value });
+  };
+
+  const hasExercisedRef = useRef();
+
   return (
     <Container className="h-100" fluid>
       <Row className="h-100">
@@ -123,40 +170,64 @@ function Journal(props) {
           />
 
           <Row
-            className="g-4 "
-            style={{ maxHeight: "900px", overflow: "auto" }}
+            className="g-4 fancy-scroll-bar"
+            style={{ maxHeight: "900px", overflow: "auto", padding: "6px" }}
           >
-            {Array.from({ length: 5 }).map((_, idx) => (
-              <Card style={cardStyle}>
-                <Card.Body>
-                  <Card.Title>February 02, 2022</Card.Title>
+            {!journals && <CircularProgress />}
+            {journals &&
+              journals.map((_, idx) => (
+                <Card
+                  className="journalCard"
+                  onClick={(e) => {
+                    handleJournalEntryClick(e, _);
+                  }}
+                >
+                  <Card.Body>
+                    <Card.Title>
+                      {new Date(_.date)
+                        .toISOString()
+                        .slice(0, 10)
+                        .replace(/-/g, " ")}
+                    </Card.Title>
 
-                  <Card.Text>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis
-                  </Card.Text>
-                  <Pill></Pill>
-                </Card.Body>
-              </Card>
-            ))}
+                    <Card.Text>{_.dayDescription}</Card.Text>
+                    {_.emotionAnalysis.emotions_detected.map((emotion) => {
+                      return <Pill type={emotion}></Pill>;
+                    })}
+                  </Card.Body>
+                </Card>
+              ))}
           </Row>
-          <Button>
-            <span> + Add New Note</span>
+          <Button
+            onClick={() => {
+              setVisible(!visible);
+            }}
+          >
+            {visible ? <span>Close</span> : <span> Open </span>}
           </Button>
         </Col>
         <Col className={visible ? "" : "d-none"} style={detailsCol} md={7}>
-          <h2>February 02, 2022</h2>
+          <h2>
+            {clickedJournal
+              ? toFancy(new Date(clickedJournal.date))
+              : newJournal.date}
+          </h2>
           <hr />
           <div className="my-4">
             <h3> Were you productive today?</h3>
             <Box>
               <Slider
                 defaultValue={0}
+                value={
+                  clickedJournal
+                    ? clickedJournal.productivityRange
+                    : newJournal.productivityRange
+                }
                 aria-label="Small"
                 valueLabelDisplay="auto"
                 step={null}
                 marks={marks}
+                onChange={handleSliderChange}
               />
             </Box>
           </div>
@@ -166,9 +237,10 @@ function Journal(props) {
             <FormControl>
               <RadioGroup
                 aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue="female"
+                defaultValue="No"
                 name="radio-buttons-group"
                 row
+                ref={hasExercisedRef}
               >
                 <FormControlLabel
                   value="Yes"
@@ -201,9 +273,28 @@ function Journal(props) {
           </div>
           <hr />
           <h3>How was your day?</h3>
-          <Form.Control as="textarea" rows={10} />
+          <Form.Control
+            className="text-black"
+            as="textarea"
+            rows={10}
+            value={
+              clickedJournal
+                ? clickedJournal.dayDescription
+                : newJournal.dayDescription
+            }
+            onChange={(e) => {
+              handleTextAreaChange(e);
+            }}
+          />
 
-          <Button>Save</Button>
+          <Button
+            onClick={async () => {
+              await addJournal();
+            }}
+          >
+            {!loading && "Save"}
+            {loading && <CircularProgress className="text-white" />}
+          </Button>
         </Col>
       </Row>
     </Container>

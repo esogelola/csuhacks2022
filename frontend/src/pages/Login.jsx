@@ -1,8 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { Container } from "react-bootstrap";
 import useLoginSignUp from "../hooks/useLoginSignUp";
 function Login() {
+  const styles = {
+    container: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      flexDirection: "column",
+      color: "white",
+      height: "100vh",
+      padding: "10px",
+    },
+    btn: {
+      background: "#C3CAB4",
+      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+      borderRadius: "13px",
+    },
+  };
+
   const {
     login,
     setLogin,
@@ -22,90 +39,9 @@ function Login() {
   };
 
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-white">
-        <div className="container">
-          <a className="navbar-brand" href="./index.html">
-            <img
-              src="https://landkit.goodthemes.co/assets/img/brand.svg"
-              className="navbar-brand-img"
-              alt="..."
-            />
-          </a>
-
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarCollapse"
-            aria-controls="navbarCollapse"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-
-          <div className="collapse navbar-collapse" id="navbarCollapse">
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarCollapse"
-              aria-controls="navbarCollapse"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <i className="fe fe-x"></i>
-            </button>
-
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item ">
-                <a
-                  className="nav-link"
-                  id="navbarLandings"
-                  href="#"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Landings
-                </a>
-              </li>
-              <li className="nav-item ">
-                <a
-                  className="nav-link "
-                  id="navbarPages"
-                  href="#"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Pages
-                </a>
-              </li>
-              <li className="nav-item ">
-                <a
-                  className="nav-link "
-                  id="navbarAccount"
-                  data-bs-toggle=""
-                  href="#"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Account
-                </a>
-              </li>
-            </ul>
-
-            <Link
-              className="navbar-btn btn btn-sm btn-primary lift ms-auto"
-              to="/signup"
-            >
-              Sign Up
-            </Link>
-          </div>
-        </div>
-      </nav>
-
-      <div className="text-center container  mt-5 bg-white shadow-sm">
+    <div className="bg " id="login" style={styles.container}>
+      <h1 className="bigHeading">Amumu</h1>
+      <Container className="text-white glossy">
         <div
           className="form-signin"
           style={{
@@ -115,14 +51,9 @@ function Login() {
             margin: "0 auto",
           }}
         >
-          <img
-            className="mb-4"
-            src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg"
-            alt=""
-            width="72"
-            height="72"
-          />
-          <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
+          <div className="heading">
+            <p className="">Sign in to your account below.</p>
+          </div>
           <label htmlFor="inputEmail" className="sr-only">
             username
           </label>
@@ -146,21 +77,21 @@ function Login() {
             required=""
             onChange={onPasswordChange}
           />
-          <div className="checkbox mb-3">
-            <label>
-              <input type="checkbox" value="remember-me" /> Remember me
-            </label>
+
+          <div className="d-flex flex-column justify-content-center mt-3">
+            <button
+              className="btn-submit"
+              type="submit"
+              onClick={() => setSubmitted(true)}
+            >
+              Login
+            </button>
+            <span className="btn-submit-lead">
+              Don’t have an account? <Link to="/signup">Sign up</Link>
+            </span>
           </div>
-          <button
-            className="btn btn-lg btn-primary btn-block"
-            type="submit"
-            onClick={() => setSubmitted(true)}
-          >
-            Login
-          </button>
-          <p className="mt-5 mb-3 text-muted">© 2017-2018</p>
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

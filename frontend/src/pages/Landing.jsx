@@ -1,147 +1,85 @@
 import React from "react";
 import { Navbar, Row, Col, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { GrBook } from "react-icons/gr";
 function Landing() {
+  const styles = {
+    container: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      color: "white",
+      height: "100vh",
+      padding: "10px",
+    },
+    btn: {
+      background: "#C3CAB4",
+      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+      borderRadius: "13px",
+    },
+  };
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-white">
-        <div className="container">
-          <a className="navbar-brand" href="./index.html">
-            <img
-              src="https://landkit.goodthemes.co/assets/img/brand.svg"
-              className="navbar-brand-img"
-              alt="..."
-            />
-          </a>
-
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarCollapse"
-            aria-controls="navbarCollapse"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-
-          <div className="collapse navbar-collapse" id="navbarCollapse">
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarCollapse"
-              aria-controls="navbarCollapse"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <i className="fe fe-x"></i>
-            </button>
-
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item ">
-                <a
-                  className="nav-link"
-                  id="navbarLandings"
-                  href="#"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Landings
-                </a>
-              </li>
-              <li className="nav-item ">
-                <a
-                  className="nav-link "
-                  id="navbarPages"
-                  href="#"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Pages
-                </a>
-              </li>
-              <li className="nav-item ">
-                <a
-                  className="nav-link "
-                  id="navbarAccount"
-                  data-bs-toggle=""
-                  href="#"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Account
-                </a>
-              </li>
-            </ul>
-
-            <Link
-              className="navbar-btn btn btn-sm btn-primary lift ms-auto"
-              to="/login"
-            >
+    <div className="bg landing" style={styles.container}>
+      <Container className="text-white">
+        <Row>
+          <Col md={8} className="d-flex flex-column justify-content-center">
+            <div className="d-flex">
+              <h1 className="display-3 text-left text-md-start">
+                Welcome to <br />
+                <span className="title">Amumu</span>.
+              </h1>
+              <svg
+                width="200"
+                height="200"
+                viewBox="0 0 138 138"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M60.375 60.375H94.875"
+                  stroke="white"
+                  stroke-width="5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M60.375 77.625H94.875"
+                  stroke="white"
+                  stroke-width="5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M112.125 21.5625H25.875C23.4933 21.5625 21.5625 23.4933 21.5625 25.875V112.125C21.5625 114.507 23.4933 116.438 25.875 116.438H112.125C114.507 116.438 116.438 114.507 116.438 112.125V25.875C116.438 23.4933 114.507 21.5625 112.125 21.5625Z"
+                  stroke="white"
+                  stroke-width="5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M43.125 21.5625V116.438"
+                  stroke="white"
+                  stroke-width="5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <p className="text-left  w-75" style={{}}>
+              Amumu is an intelligent mood tracking AI app that automatically
+              detects your mood and suggests the ways to improve your mood.
+            </p>
+          </Col>
+          <Col md={4} className="d-flex flex-column justify-content-center">
+            <Link to="/login" className="btn-login">
               Login
             </Link>
-          </div>
-        </div>
-      </nav>
-      <div
-        className="pt-4 pt-md-11 bg-white shadow-sm"
-        style={{ minHeight: "100vh" }}
-      >
-        <Container>
-          <Row className="align-items-center">
-            <Col md={7} lg={6}>
-              <h1 className="display-3 text-center text-md-start">
-                Welcome to <span className="text-primary">Amumu</span>. <br />
-                Write it Down.
-              </h1>
-              <p className="lead text-center text-md-start text-muted mb-6 mb-lg-8">
-                Journal your journey, get your feedback and get better.
-              </p>
-              <div className="text-center text-md-start">
-                <a
-                  href="overview.html"
-                  className="btn btn-primary shadow lift me-1"
-                >
-                  View all pages{" "}
-                  <i className="fe fe-arrow-right d-none d-md-inline ms-3"></i>
-                </a>
-                <a href="docs/index.html" className="btn btn-primary-soft lift">
-                  Documentation
-                </a>
-              </div>
-            </Col>
-            <Col md={5} lg={6}>
-              <img
-                src="https://landkit.goodthemes.co/assets/img/illustrations/illustration-2.png"
-                className="img-fluid mw-md-150 mw-lg-130 mb-6 mb-md-0 aos-init aos-animate"
-                alt="..."
-                data-aos="fade-up"
-                data-aos-delay="100"
-              />
-            </Col>
-          </Row>
-        </Container>
-      </div>
-      <div className="pt-4 pt-md-11 bg-white shadow-sm">
-        <Container>
-          <h2 className="mb-0">Inspiration</h2>
-          <p className="lead text-center text-md-start text-muted mb-6 mb-lg-8">
-            Journal your journey, get your feedback and get better.
-          </p>
-          <p>
-            It is no secret that we are facing a mental health crisis,
-            exacerbated by the COVID-19 pandemic. Statistics Canada reported a
-            20% reduction in youth aged 15-24 reporting excellent or very good
-            mental health after the pandemic started, with a particularly heavy
-            impact of LGBTQ peoples and visible minorities. In trying and
-            distant times, affordable mental health resources have grown
-            increasingly difficult to access, creating a challenge for those in
-            desperate need of help
-          </p>
-        </Container>
-      </div>
+            <span className="btn-lead">
+              Don’t have an account? <Link to="/signup">Sign up</Link>
+            </span>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
