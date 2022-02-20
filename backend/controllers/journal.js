@@ -5,8 +5,7 @@ exports.get = async (req, res)=>{
     
 
     const userId = req.body.userId;
-    console.log(userId);
-
+    
     try
     {
         if (userId) {
