@@ -2,6 +2,7 @@ const express = require("express");
 
 // import all the routes here
 const userRoutes = require("./user");
+const journalRoutes = require("./journal");
 
 // Create a router object (Stores all endpoints)
 const router = express.Router();
@@ -19,5 +20,6 @@ router.get("/status", (req, res) => {
 });
 
 router.use("/user", userRoutes);
+router.use("/journal", journalRoutes);
 
 module.exports = router;
