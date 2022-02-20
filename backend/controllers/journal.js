@@ -60,7 +60,7 @@ exports.create = async (req, res)=>{
         userId: req.body.userId,
         dayDescription: req.body.dayDescription,
         productivityRange: req.body.productivityRange,
-        hasExcercised: req.body.hasExcercised
+        hasExercised: req.body.hasExercised
       });
     
       //5 - Save new user to mongodb and return unique ID

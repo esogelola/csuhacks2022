@@ -15,7 +15,7 @@ const journalSchema = new mongoose.Schema({
     productivityRange:{
         type: Number
     },
-    hasExcercised:{
+    hasExercised:{
         type:Boolean
     }
 })
