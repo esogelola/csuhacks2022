@@ -4,11 +4,6 @@ import { IoStatsChartOutline } from "react-icons/io5";
 import { AiOutlineStar } from "react-icons/ai";
 const SidebarItems = [
   {
-    name: "resources",
-    icon: <BsGlobe />,
-    route: "/resources",
-  },
-  {
     name: "Journals",
     icon: <RiBookReadLine />,
     route: "/journal",

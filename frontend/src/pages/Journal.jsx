@@ -27,11 +27,11 @@ const marks = [
   },
   {
     value: 75,
-    label: "Very",
+    label: "Pretty",
   },
   {
     value: 100,
-    label: "Very Very",
+    label: "Very",
   },
 ];
 
@@ -54,7 +54,7 @@ function Journal(props) {
   `;
 
   const searchCol = {
-    background: "#B8C2BB",
+    background: "#8AA9A1",
     boxShadow: "0px 4px 14px rgba(0, 0, 0, 0.25)",
     padding: "1rem 3rem",
 
@@ -65,6 +65,7 @@ function Journal(props) {
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
     borderRadius: "31px",
     padding: "2rem 3rem",
+    fontFamily:"Libre Baskerville", 
 
     transition: "all 0.25s ease-in-out",
     margin: "16px",
@@ -73,6 +74,8 @@ function Journal(props) {
   const inputStyle = {
     background: "#FFFFFF",
     borderRadius: "14px",
+    fontFamily: "Libre Baskerville",
+    fontSize : "25px",
   };
 
   const Button = styled.button`
@@ -106,14 +109,13 @@ function Journal(props) {
 
   const cardStyle = {
     background: "#FCFAF4",
-    border: "4px solid #565F56",
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
     borderRadius: "19px",
   };
   return (
     <Container className="h-100" fluid>
       <Row className="h-100">
-        <Col md={visible ? 4 : 12} style={searchCol} className="overflow-auto">
+        <Col md={visible ? 3 : 12} style={searchCol} className="overflow-auto">
           <Form.Control
             size="sm"
             type="text"
