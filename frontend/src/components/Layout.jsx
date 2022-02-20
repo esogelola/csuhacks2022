@@ -9,7 +9,7 @@ function Layout(props) {
         {props.location.pathname !== "/" &&
           props.location.pathname !== "/signup" &&
           props.location.pathname !== "/login" && (
-            <Sidebar history={props.history} />
+            <Sidebar history={props.history} defaultActive="1" />
           )}
         <div className="w-100">{props.children}</div>
       </div>
